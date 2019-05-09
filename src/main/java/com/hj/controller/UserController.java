@@ -1,13 +1,11 @@
 package com.hj.controller;
 
+import com.hj.entity.User;
+import com.hj.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 
@@ -21,12 +19,31 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_UTF8_VALUE;
 public class UserController {
 
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private UserService userService;
 
-
+    /**
+     * @return 返回所有用户
+     */
     @GetMapping("/users")
-    public List<Map<String, Object>> findUsers() {
-        List<Map<String, Object>> list = jdbcTemplate.queryForList("select * from user");
-        return list;
+    public List<User> findAll() {
+        return userService.findAll();
+    }
+
+    /**
+     * @param id
+     * @return 返回单个用户
+     */
+    @GetMapping("/users/{id}")
+    public User findById(@PathVariable Long id) {
+        return userService.findById(id);
+    }
+
+
+    /**
+     * 新增用户
+     */
+    @PostMapping(value = "/users", consumes = APPLICATION_JSON_UTF8_VALUE)
+    public void add(@RequestBody User user) {
+        userService.add(user);
     }
 }
