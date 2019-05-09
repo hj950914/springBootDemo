@@ -1,7 +1,6 @@
 package com.hj.mapper;
 
 import com.hj.entity.User;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,7 +9,6 @@ import java.util.List;
  * Date: 2019-05-09 11:15
  * Description: <描述>
  */
-@Mapper
 public interface UserMapper {
 
     /**

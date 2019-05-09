@@ -9,20 +9,20 @@
     </sql>
 
     <!--查询全部用户-->
-    <select id="selectAll" resultType="com.hj.entity.User">
+    <select id="selectAll" resultType="User">
         select
         <include refid="userColumn"/>
         from user
     </select>
     <!--查询单个用户-->
-    <select id="selectById" parameterType="Long" resultType="com.hj.entity.User">
+    <select id="selectById" parameterType="Long" resultType="User">
         select
         <include refid="userColumn"/>
         from user
         where id=#{id}
     </select>
     <!--插入用户-->
-    <insert id="insert" parameterType="com.hj.entity.User" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="User" useGeneratedKeys="true" keyProperty="id">
         insert into user (username,password)
         values (#{username},#{password})
     </insert>
